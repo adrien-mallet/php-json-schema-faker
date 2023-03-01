@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace JSONSchemaFaker;
 
+use Faker\Generator;
 use function call_user_func_array;
 use function dirname;
 use Faker\Factory;
@@ -155,9 +156,9 @@ final class Faker
         return $schema->multipleOf ?? 1;
     }
 
-    public function getInternetFakerInstance() : Internet
+    public function getInternetFakerInstance() : Generator
     {
-        return new Internet(Factory::create());
+        return Factory::create('fr_FR');
     }
 
     public function getFormattedValue($schema)
@@ -181,6 +182,8 @@ final class Faker
             // A universal resource identifier (URI), according to RFC3986.
             case 'uri':
                 return $this->getInternetFakerInstance()->url();
+            case 'uuid':
+                return $this->getInternetFakerInstance()->uuid();
             default:
                 throw new UnsupportedTypeException("Unsupported type: {$schema->format}");
         }
