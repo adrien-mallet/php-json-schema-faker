@@ -181,6 +181,8 @@ final class Faker
             // A universal resource identifier (URI), according to RFC3986.
             case 'uri':
                 return $this->getInternetFakerInstance()->url();
+            case 'uid':
+                return $this->getInternetFakerInstance()->uid();
             default:
                 throw new UnsupportedTypeException("Unsupported type: {$schema->format}");
         }
